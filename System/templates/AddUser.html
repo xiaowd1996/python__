@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <title>Title</title>
+</head>
+<body style="background-color: rgb(205, 233, 255)">
+ <form method="post" id = "addUser"  style='margin-left:40%;margin-top: 5%' >
+       学号：<input type="text" name="studentId"  placeholder="学生学号"/><br><br>
+       密码：  <input type="text" name="studentpassword"  placeholder="密码"/><br><br>
+       <input  type = "button" onclick="confirm()" value="添加"  /><br><br>
+</form>
+<script>
+function confirm() {
+
+       /* username = document.getElementById("username").value;
+        /*userphoto = document.getElementById("userphoto");*/
+       /* userphone = document.getElementById("userphone").value ;
+        useremail = document.getElementById("useremail").value;*/
+       var form = new FormData(document.getElementById("addUser"));
+
+        $.ajax(
+            {
+                type:"POST",
+                processData:false,
+                contentType:false,
+                async: false,
+                url:"/adduser2/",
+                data:form,
+                beforeSend:function () {
+                   /* alert(useremail)
+                    alert(username)
+                    alert(userphone)*/
+                },
+                success: function (returndata) {
+                    if(returndata )
+                    {alert(returndata);
+                    window.location.href = '/welcome/';
+                    }
+                    else
+                    {
+                        alert("添加失败了....")
+
+                    }
+          },
+          error: function (returndata) {
+              alert(returndata);
+                window.location.href = '#';
+          }
+     });
+
+
+    }
+
+     </script>
+</body>
+</html>
