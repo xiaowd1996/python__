@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+ <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>添加课程信息</title>
+</head>
+<body style="background-color: rgb(205, 233, 255)" >
+ <form method="post" id = "addUser"  style='margin-left:40%;margin-top: 5%' >
+       学号：<input type="text" name="studentId"  placeholder="学生学号"/><br><br>
+       姓名：  <input type="text" name="studentName"  placeholder="例如：张三"/><br><br>
+       课程序号： <input type="text" name="courseId"  placeholder="课程序号"/><br><br>
+       课程名称：<input type="text" name="courseName"  placeholder="课程名"/><br><br>
+       课程时间：<input type="text" name="courseTime"  placeholder=" 课程时间"/><br><br>
+       课程地点：<input type="text" name="courseLocation"  placeholder="课程地点"/><br><br>
+       授课教师名：<input type="text" name="Teacher" placeholder="授课教室名"/><br><br>
+            <input  type = "button" onclick="confirm()" value="添加"  /><br><br>
+</form>
+<script>
+function confirm() {
+
+       /* username = document.getElementById("username").value;
+        /*userphoto = document.getElementById("userphoto");*/
+       /* userphone = document.getElementById("userphone").value ;
+        useremail = document.getElementById("useremail").value;*/
+       var form = new FormData(document.getElementById("addUser"));
+
+        $.ajax(
+            {
+                type:"POST",
+                processData:false,
+                contentType:false,
+                async: false,
+                url:"/addcourse/",
+                data:form,
+                beforeSend:function () {
+                   /* alert(useremail)
+                    alert(username)
+                    alert(userphone)*/
+                },
+                success: function (returndata) {
+                    if(returndata )
+                    {alert(returndata);
+                    window.location.href = '/welcome/';
+                    }
+                    else
+                    {
+                        alert("添加失败了....")
+
+                    }
+          },
+          error: function (returndata) {
+              alert(returndata);
+                window.location.href = '#';
+          }
+     });
+
+
+    }
+
+     </script>
+</body>
+</html>
